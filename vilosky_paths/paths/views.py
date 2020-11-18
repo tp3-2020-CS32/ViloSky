@@ -6,7 +6,7 @@ from django.http import HttpResponse
 def home(request):
 	text = "This is the home page.<br>"
 	text += "<a href='/paths/search/'>Go to the Search Page</a><br>"
-	text += "<a href='/paths/search/'>Go to the Dashboard</a><br>"
+	text += "<a href='/paths/dashboard/'>Go to the Dashboard</a><br>"
 	return HttpResponse(text)
 
 def search(request):
