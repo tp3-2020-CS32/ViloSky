@@ -4,14 +4,11 @@ from django.http import HttpResponse
 # Create your views here.
 
 def home(request):
-	text = "This is the home page.<br>"
-	text += "<a href='/paths/search/'>Go to the Search Page</a><br>"
-	text += "<a href='/paths/dashboard/'>Go to the Dashboard</a><br>"
-	return HttpResponse(text)
+	return render(request, 'paths/home.html')
 
 def search(request):
-	return HttpResponse("This is the search page")
+	return render(request, 'paths/search.html')
 	
 def dashboard(request):
-	return HttpResponse("This is the dashboard")
+	return render(request, 'paths/dashboard.html')
 
