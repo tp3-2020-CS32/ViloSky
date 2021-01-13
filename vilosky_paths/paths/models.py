@@ -28,3 +28,12 @@ class SearchResults(models.Model):
 	# unsure whether this will read well
 	def __str__(self):
 		return self.username + "'s search on " + self.time
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    
+    first_name = models.CharField(max_length=50,blank=True)
+    last_name = models.CharField(max_length=50, blank=True)
+    
+    def __str__(self):
+        return self.user.username
