@@ -4,16 +4,14 @@ from django.contrib.auth.models import User
 
 class Tag(models.Model):
 	tag_name = models.CharField(max_length = 50, unique=True)
-	resources = models.ManyToManyField(Resource)
 	
 	def __str__(self):
-        return self.tag_name
+		return self.tag_name
 	
 class Resource(models.Model):
 	url = models.URLField(unique=True)
 	name = models.CharField(max_length = 50, unique=True)
 	tags = models.ManyToManyField(Tag)
-	searches = models.ManyToManyField(SearchResults)
 	
 	def __str__(self):
 		return self.name
