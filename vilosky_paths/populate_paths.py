@@ -7,6 +7,7 @@ from paths.models import Tag, Resource
 
 def populate():
     
+    print("Beginning population")
     resources = [
         {'name' : 'Returning to office after Maternity leave',
         'tags' : ['Female','Maternity Leave']},
@@ -14,10 +15,12 @@ def populate():
     
     for res in resources:
         add_resource(res['name'],res['tags'])
+    
+    print("Population script complete")
         
 
 def add_resource(name,tag_list):
-    new_resource = Resource.objects.get_or_create()
+    new_resource = Resource.objects.get_or_create()[0]
     new_resource.name = name
     for tag in tag_list:
         add_tag(new_resource,tag)
@@ -32,8 +35,13 @@ def add_tag(resource,tag_name):
         resource.save()
         return resource
     else:
-        new_tag = Tag.objects.get_or_create(tag_name=tag_name)
+        new_tag = Tag.objects.get_or_create(tag_name=tag_name)[0]
         new_tag.save()
         resource.tags.add(new_tag)
         resource.save()          
-        return resource    
+        return resource
+
+
+#Main
+if __name__ == '__main__':
+	populate()
