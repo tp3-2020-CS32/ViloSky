@@ -15,9 +15,9 @@ def search(request):
         search_form = SearchForm(request.POST)
         
         if search_form.is_valid():
-            search_details = search_form.save()
-            search_tags = search_details.selected_tags
-            request.session['search_tags'] = search_tags
+            search_details = search_form.data['selected_tags']
+            
+            request.session['search_tags'] = search_details
             return redirect('paths/dashboard.html')
         else:
             print(search_form.errors)
