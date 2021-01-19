@@ -2,17 +2,23 @@
 {% load static %}
 
 {% block title_block %}
-Dashboard
+Login
 {% endblock %}
 
 {% block body_block %}
-<h1>Login to Vilosky Pathways</h1>
-<form id="login_form" method="post" action="{% url 'paths:login' %}">
-	{% csrf_token %}
-	Username: <input type="text" name="username" value="" size="50" />
-	<br />
-	Password: <input type="password" name="password" value="" size="50" />
-	<br />
-	<input type="submit" value="submit" />
-</form>
+<div class="container">
+	<h1 class="mt-5">Login to Vilosky Pathways</h1>
+	<form id="login_form" method="post" action="{% url 'paths:login' %}">
+		{% csrf_token %}
+		<div class="mb-3">
+			<label for="usernameInput" class="form-label">Username</label>
+			<input type="text" name="username" class="form-control" id="usernameInput" aria-describedby="username">
+		</div>
+		<div class="mb-3">
+			<label for="passwordInput" class="form-label">Password</label>
+			<input type="password" name="password" class="form-control" id="passwordInput">
+		</div>
+		<input type="submit" class="btn btn-primary" value="Login">
+	</form>
+</div>
 {% endblock %}
