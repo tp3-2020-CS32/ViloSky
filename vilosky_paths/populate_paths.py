@@ -31,7 +31,7 @@ def add_resource(name,tag_list):
 def add_tag(resource,tag_name):
     check_tag = Tag.objects.filter(tag_name=tag_name)
     if check_tag.exists():
-        resource.tags.add(check_tag)
+        resource.tags.add(check_tag[0])
         resource.save()
         return resource
     else:
