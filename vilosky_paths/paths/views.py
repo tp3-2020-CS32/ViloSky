@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from paths.forms import UserForm, UserProfileForm, SearchForm
 from django.contrib.auth.decorators import login_required
+from paths.models import Resource
 
 # Create your views here.
 
@@ -16,9 +17,9 @@ def search(request):
         
         if search_form.is_valid():
             search_details = search_form.data['selected_tags']
-            
+            print((search_details))
             request.session['search_tags'] = search_details
-            return redirect('paths/dashboard.html')
+            return redirect('/paths/dashboard')
         else:
             print(search_form.errors)
     else:
@@ -29,7 +30,8 @@ def search(request):
 def dashboard(request):
     
     search_tags = request.session['search_tags']
-    resources = Resource.objects.filter(tags__in= search_tags)
+    print(("search_tags"))
+    resources = Resource.objects.filter(tags__tag_name= search_tags)
 
     return render(request, 'paths/dashboard.html', context = {'resources':resources})
 

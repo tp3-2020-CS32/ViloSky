@@ -11,6 +11,8 @@ def populate():
     resources = [
         {'name' : 'Returning to office after Maternity leave',
         'tags' : ['Female','Maternity Leave']},
+        {'name' : 'Career Focus',
+        'tags' :['Male','Female','Business']},
         ]
     
     for res in resources:
@@ -20,8 +22,13 @@ def populate():
         
 
 def add_resource(name,tag_list):
-    new_resource = Resource.objects.get_or_create()[0]
-    new_resource.name = name
+
+    check_res = Resource.objects.filter(name=name)
+    if check_res.exists():   
+        new_resource = check_res[0]
+    else:
+        new_resource = Resource.objects.get_or_create(name = name)[0]
+        new_resource.save()       
     for tag in tag_list:
         add_tag(new_resource,tag)
     new_resource.save()
