@@ -12,7 +12,7 @@ Additional information can be found in the project wiki: https://stgit.dcs.gla.a
 
 ## Installation
 
-Can be accessed externally through the following URL: http://2401566a.pythonanywhere.com/
+Can be accessed externally through the following URL: https://2401566a.pythonanywhere.com/
 
 For development, the following packages are required by running the following command `pip install -r requirements.txt` within the virtual environment:
 ```asgiref==3.3.1
