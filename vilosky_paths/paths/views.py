@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
-from paths.forms import UserForm, UserProfileForm
+from paths.forms import UserForm, UserProfileForm, SearchForm
 from django.contrib.auth.decorators import login_required
+from paths.models import Resource
 
 # Create your views here.
 
@@ -11,10 +12,31 @@ def home(request):
 	return render(request, 'paths/home.html')
 
 def search(request):
-	return render(request, 'paths/search.html')
+    if request.method == 'POST':
+        search_form = SearchForm(request.POST)
+        
+        if search_form.is_valid():
+            search_details = search_form.cleaned_data.get("selected_tags")      
+            search_tags_list = []
+            for tag in list(search_details.values("tag_name")):
+                search_tags_list.append(tag["tag_name"])
+            request.session['search_tags'] = search_tags_list
+
+            return redirect('/paths/dashboard')
+        else:
+            print(search_form.errors)
+    else:
+        search_form = SearchForm()
+
+    return render(request, 'paths/search.html', context = {'search_form':search_form})
 	
 def dashboard(request):
-	return render(request, 'paths/dashboard.html')
+    search_tags = request.session['search_tags']
+    print((search_tags))
+    resources = Resource.objects.filter(tags__tag_name__in= search_tags).distinct()
+    resources_urls = [resource.url for resource in resources]
+
+    return render(request, 'paths/dashboard.html', context = {'resources':resources_urls})
 
 def register(request):
     registered = False

@@ -5,5 +5,4 @@ db.sqlite3
 *.key
 thumbs.db
 /media
-paths/migrations
-vilosky_paths/migrations
+vilosky_paths/paths/migrations
