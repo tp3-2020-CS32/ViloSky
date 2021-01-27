@@ -34,8 +34,9 @@ def dashboard(request):
     search_tags = request.session['search_tags']
     print((search_tags))
     resources = Resource.objects.filter(tags__tag_name__in= search_tags).distinct()
+    resources_urls = [resource.url for resource in resources]
 
-    return render(request, 'paths/dashboard.html', context = {'resources':resources})
+    return render(request, 'paths/dashboard.html', context = {'resources':resources_urls})
 
 def register(request):
     registered = False
