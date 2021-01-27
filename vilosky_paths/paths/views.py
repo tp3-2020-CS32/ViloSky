@@ -16,9 +16,12 @@ def search(request):
         search_form = SearchForm(request.POST)
         
         if search_form.is_valid():
-            search_details = search_form.data['selected_tags']
-            print((search_details))
-            request.session['search_tags'] = search_details
+            search_details = search_form.cleaned_data.get("selected_tags")      
+            search_tags_list = []
+            for tag in list(search_details.values("tag_name")):
+                search_tags_list.append(tag["tag_name"])
+            request.session['search_tags'] = search_tags_list
+
             return redirect('/paths/dashboard')
         else:
             print(search_form.errors)
@@ -28,10 +31,9 @@ def search(request):
     return render(request, 'paths/search.html', context = {'search_form':search_form})
 	
 def dashboard(request):
-    
     search_tags = request.session['search_tags']
-    print(("search_tags"))
-    resources = Resource.objects.filter(tags__tag_name= search_tags)
+    print((search_tags))
+    resources = Resource.objects.filter(tags__tag_name__in= search_tags).distinct()
 
     return render(request, 'paths/dashboard.html', context = {'resources':resources})
 

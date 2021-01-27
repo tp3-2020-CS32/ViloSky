@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class Tag(models.Model):
 	tag_name = models.CharField(max_length = 50, unique=True)
-	
+	tag_categories = ()
 	def __str__(self):
 		return self.tag_name
 	

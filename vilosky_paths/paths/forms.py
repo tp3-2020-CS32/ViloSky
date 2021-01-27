@@ -15,4 +15,4 @@ class UserProfileForm(forms.ModelForm):
         fields = ('first_name', 'last_name',)
 
 class SearchForm(forms.Form):
-    selected_tags = forms.ModelMultipleChoiceField(queryset=Tag.objects.all(), to_field_name="tag_name",)
+    selected_tags = forms.ModelMultipleChoiceField(queryset=Tag.objects.all(), to_field_name="tag_name")
