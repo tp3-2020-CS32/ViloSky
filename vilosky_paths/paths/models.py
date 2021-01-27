@@ -3,10 +3,37 @@ from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 
 class Tag(models.Model):
-	tag_name = models.CharField(max_length = 50, unique=True)
-	tag_categories = ()
-	def __str__(self):
-		return self.tag_name
+    
+    #Below is all Categories of tags that get added to choices field
+    Personal_Details = "Personal Details"
+    Disability = "Mental or Physical Disability"
+    Current_Work_Situation = "Current Work Situation"
+    Work_Place_Barriers = "Work Place Barriers"
+    Last_Paid_Work = "Time since last paid work"
+    Industry = "Industry"
+    Area_Of_Interest = "Area of Interest"
+    Formal_Qualifications = "Formal Qualifications"
+    Current_Experience = "Current Experience"
+    Ideal_Hours = "Ideal Working Hours a Week"
+    Goals = "Goals"
+    
+    tag_categories_choices = ( (Personal_Details, "Personal Details"),
+                                (Disability, "Mental or Physical Disability"),
+                                (Current_Work_Situation, "Current Work Situation"),
+                                (Work_Place_Barriers, "Work Place Barriers"),
+                                (Last_Paid_Work, "Time since last paid work"),
+                                (Industry, "Industry"),
+                                (Area_Of_Interest, "Area of Interest"),
+                                (Formal_Qualifications, "Formal Qualifications"),
+                                (Current_Experience, "Current Experience"),
+                                (Ideal_Hours, "Ideal Working Hours a Week"),
+                                (Goals, "Goals"))
+    
+    tag_name = models.CharField(max_length = 50, unique=True)    
+    tag_categories = models.CharField(max_length = 50, choices=tag_categories_choices,default=Personal_Details)
+    
+    def __str__(self):
+        return self.tag_name
 	
 class Resource(models.Model):
 	url = models.URLField(unique=True)
