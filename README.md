@@ -14,7 +14,7 @@ Additional information can be found in the project wiki: https://stgit.dcs.gla.a
 
 Can be accessed externally through the following URL: http://2401566a.pythonanywhere.com/
 
-For development, the following packages are required within the virtual environment:
+For development, the following packages are required by running the following command `pip install -r requirements.txt` within the virtual environment:
 ```asgiref==3.3.1
 Django==3.1.5
 Pillow==8.1.0
