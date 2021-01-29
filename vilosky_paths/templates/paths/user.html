@@ -1,0 +1,7 @@
+{% extends 'paths/base.html' %}
+{% load static %}
+
+{% block content %}
+Hello, {{ user.username|default:'Guest' }}!
+{% endblock %}
+
