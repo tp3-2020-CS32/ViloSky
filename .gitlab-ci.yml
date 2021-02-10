@@ -9,4 +9,6 @@ test:
   script:
     - pip install -r requirements.txt
     - cd vilosky_paths
+    - python manage.py makemigrations
+    - python manage.py migrate --run-syncdb
     - python manage.py test
