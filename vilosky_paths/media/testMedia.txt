@@ -1,0 +1,1 @@
+This file was created to enable the media directory to be committed to the repository. It can be deleted locally.
