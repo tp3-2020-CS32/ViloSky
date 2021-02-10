@@ -7,4 +7,4 @@ test:
   tags:
     - docker
   script:
-    - python /vilosky_paths/manage.py test
+    - python -m unittest discover "test_*.py"
