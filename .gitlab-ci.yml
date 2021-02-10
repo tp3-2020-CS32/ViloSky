@@ -7,4 +7,4 @@ test:
   tags:
     - docker
   script:
-    - python -m unittest discover "test_*.py"
+    - python -m unittest discover
