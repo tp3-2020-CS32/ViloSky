@@ -5,3 +5,4 @@ db.sqlite3
 *.key
 thumbs.db
 vilosky_paths/paths/migrations
+vilosky_paths/media
