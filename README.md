@@ -24,7 +24,7 @@ sqlparse==0.4.1
 ## Populating the database
 You can both populate an empty databse, and export population data from your current database
 
-**Importing**
+**Importing** <br />
 Assuming you have a valid json file
 
 1. Delete your db.sqlite3 and migrations
