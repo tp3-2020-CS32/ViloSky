@@ -1,5 +1,5 @@
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif; 
 }
 
 .navbar {
@@ -20,14 +20,10 @@ body {
     color: #5c478b;
 }
 
-.twitter {
-    color: #5c478b;
-}
-
-.twitter > a:hover {
-    columns: #000000!important;
-}
-
 h1, h2, h3 {
     color: #4f3d76;
+}
+
+figcaption {
+    font: italic smaller sans-serif;
 }
