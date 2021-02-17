@@ -21,6 +21,17 @@ Pillow==8.1.0
 pytz==2020.5
 sqlparse==0.4.1
 ```
+## Populating the database
+
+**Part 1 - Exporting**
+1. Run "manage.py dumpdata paths {auth} {admin} > dumpdata.json" - include {} apps if you wish to export accounts too
+
+**Part 2 - Importing**
+1. Delete your db.sqlite3 and migrations
+2. Set up the database tables
+-- 2.a Run "manage.py makemigrations"
+-- 2.b Run "manage.py migrate --run-syncdb"
+3. Run "manage.py loaddata dumpdata.json"
 
 ## Contributing
 
