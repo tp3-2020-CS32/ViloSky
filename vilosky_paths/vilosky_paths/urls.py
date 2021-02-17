@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
+from django.conf import settings
+from django.conf.urls.static import static
 from paths import views
 
 urlpatterns = [
@@ -24,4 +26,4 @@ urlpatterns = [
 	path('paths/', include('paths.urls')),
 	#the above maps any URLs starting with paths/ to be handled by the paths app
 	path('admin/', admin.site.urls),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

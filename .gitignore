@@ -4,5 +4,5 @@ __pycache__/
 db.sqlite3
 *.key
 thumbs.db
-/media
 vilosky_paths/paths/migrations
+vilosky_paths/media

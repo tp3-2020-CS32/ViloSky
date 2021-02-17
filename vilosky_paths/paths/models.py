@@ -36,12 +36,14 @@ class Tag(models.Model):
         return self.tag_name
 	
 class Resource(models.Model):
-	url = models.URLField(unique=True)
-	name = models.CharField(max_length = 50, unique=True)
-	tags = models.ManyToManyField(Tag)
-	
-	def __str__(self):
-		return self.name
+    name = models.CharField(max_length = 50, unique=True)
+    tags = models.ManyToManyField(Tag)
+    media = models.FileField(upload_to='resources/', null=True)
+    # url for if resource links to external media
+    url = models.URLField(blank=True, null=True)
+    
+    def __str__(self):
+        return self.name
 	
 # currently only holds data on the search results, but could theoretically also
 # hold the search inputs for users' future reference
