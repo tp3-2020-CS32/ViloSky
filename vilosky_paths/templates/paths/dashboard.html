@@ -8,72 +8,39 @@ Dashboard
 {% block body_block %}
 <div class="container">
     <h1 class="mt-5">Dashboard</h1>
-    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-        laborum.</p>
+    {% if user.is_authenticated %}
+    <p class="lead">Hi {{user}}, it’s great to meet you. We hope you find the following advice useful.</p>
+    {% else %}
+    <p class="lead">Hi, it’s great to meet you. We hope you find the following advice useful.</p>
+    {% endif %}
     <h2>Our Advice</h2>
     <div class="row">
         <div class="col-sm-9">
+            {% if resources %}
+            {% for resource in resources %}
             <div class="card mb-3">
                 <div class="row no-gutters">
                     <div class="card-body">
-                        <h5 class="card-title">Advice title</h5>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore
-                            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                            nisi ut aliquip ex ea
-                            commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                            dolore eu fugiat nulla
-                            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                            mollit anim id est
-                            laborum.</p>
+                        <h5 class="card-title">{{resource.name}}</h5>
+                        <p class="card-text">We recommend the following resource:
+                            <br><a href="{{resource.url}}" target="_blank">{{resource.url}}</a>
+                        </p>
                     </div>
                 </div>
             </div>
-            <div class="card mb-3">
-                <div class="row no-gutters">
-                    <div class="card-body">
-                        <h5 class="card-title">Advice title</h5>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore
-                            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                            nisi ut aliquip ex ea
-                            commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                            dolore eu fugiat nulla
-                            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                            mollit anim id est
-                            laborum.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="card mb-3">
-                <div class="row no-gutters">
-                    <div class="card-body">
-                        <h5 class="card-title">Advice title</h5>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore
-                            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                            nisi ut aliquip ex ea
-                            commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                            dolore eu fugiat nulla
-                            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                            mollit anim id est
-                            laborum.</p>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
+            {% else %}
+            <p>You have not run a recent search. You can run one by heading to <a href="{% url 'paths:search' %}">Find
+                    Paths</a>.</p>
+            {% endif %}
         </div>
         <div class="col-sm-3 text-center">
-            <button type="button" class="btn btn-primary btn-lg btn-block">View previous searches</button>
-            <button type="button" class="btn btn-primary btn-lg btn-block">View a list of resources</button>
-            <button type="button" class="btn btn-primary btn-lg btn-block">Download advice PDF</button>
+            {% if user.is_authenticated %}
+            <button type="button" class="btn btn-lg btn-block">View previous searches</button>
+            {% endif %}
+            <button type="button" class="btn btn-lg btn-block">View a list of resources</button>
+            <button type="button" class="btn btn-lg btn-block">Download advice PDF</button>
         </div>
     </div>
 </div>
-
-{{ resources }}
-<br>
-
 {% endblock %}

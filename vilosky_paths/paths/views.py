@@ -29,14 +29,16 @@ def search(request):
         search_form = SearchForm()
 
     return render(request, 'paths/search.html', context = {'search_form':search_form})
-	
-def dashboard(request):
-    search_tags = request.session['search_tags']
-    print((search_tags))
-    resources = Resource.objects.filter(tags__tag_name__in= search_tags).distinct()
-    resources_urls = [resource.url for resource in resources]
 
-    return render(request, 'paths/dashboard.html', context = {'resources':resources_urls})
+def dashboard(request):
+    try:
+        search_tags = request.session['search_tags']
+        print((search_tags))
+        resources = Resource.objects.filter(tags__tag_name__in= search_tags).distinct()
+    except:
+        return render(request, 'paths/dashboard.html', context = None)
+
+    return render(request, 'paths/dashboard.html', context = {'resources':resources})
 
 def register(request):
     registered = False
