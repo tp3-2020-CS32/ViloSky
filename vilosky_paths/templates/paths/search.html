@@ -14,78 +14,93 @@ Search
         pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
         laborum.</p>
 	
-	
-    <form>
-        <div class="form-row">
-            <div class="col-md-6 mb-3">
-                <label for="validationDefault01">Gender</label>
-                <select class="custom-select" id="validationDefault01" required>
-                    <option selected disabled value="">Choose...</option>
-                    <option>...</option>
-                </select>
-            </div>
-            <div class="col-md-6 mb-3">
-                <label for="validationDefault02">Sexual Orientation</label>
-                <select class="custom-select" id="validationDefault02" required>
-                    <option selected disabled value="">Choose...</option>
-                    <option>...</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="col-md-6 mb-3">
-                <label for="validationDefault03">Ethnicity</label>
-                <select class="custom-select" id="validationDefault03" required>
-                    <option selected disabled value="">Choose...</option>
-                    <option>...</option>
-                </select>
-            </div>
-            <div class="col-md-6 mb-3">
-                <label for="validationDefault04">Physical/Mental Disability</label>
-                <select class="custom-select" id="validationDefault04" required>
-                    <option selected disabled value="">Choose...</option>
-                    <option>...</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="col-md-6 mb-3">
-                <label for="validationDefault05">What best describes your current work situation?</label>
-                <select class="custom-select" id="validationDefault05" required>
-                    <option selected disabled value="">Choose...</option>
-                    <option>...</option>
-                </select>
-            </div>
-        </div>
-        <label for="checkbox-group">What best describes your current work barriers?</label>
-        <div class="form-group" id="checkbox-group">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                <label class="form-check-label" for="defaultCheck1">
-                    Childcare
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-                <label class="form-check-label" for="defaultCheck2">
-                    Career responsibilites
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
-                <label class="form-check-label" for="defaultCheck3">
-                    Technical skills
-                </label>
-            </div>
-        </div>
-        <a href="{% url 'paths:dashboard' %}" type="button" class="float-right btn btn-primary btn-lg">Find a pathway</a>
-    </form>
-	
 	<form id="search_form" method="post" action="{% url 'paths:search' %}" enctype="multipart/form-data">
-
 	{% csrf_token %}
+    
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label for="validationDefault01">Personal Details</label>
+				<div class="fieldWrapper">
+					{{ search_form.personal_details_tags }}
+				</div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="validationDefault02">Mental or Physical Disability</label>
+				<div class="fieldWrapper">
+					{{ search_form.disability_tags }}
+				</div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label for="validationDefault03">Current Work Situation</label>
+                <div class="fieldWrapper">
+					{{ search_form.current_work_situations }}
+				</div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="validationDefault04">Work Place Barriers</label>
+				<div class="fieldWrapper">
+					{{ search_form.work_place_barriers_tags }}
+				</div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label for="validationDefault05">Time since Last Paid Work</label>
+				<div class="fieldWrapper">
+					{{ search_form.last_paid_work_tags }}
+				</div>
+            </div>
+			<div class="col-md-6 mb-3">
+                <label for="validationDefault05">Industry</label>
+				<div class="fieldWrapper">
+					{{ search_form.industry_tags }}
+				</div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label for="validationDefault05">Area of Intrest</label>
+				<div class="fieldWrapper">
+					{{ search_form.area_of_interest_tags }}
+				</div>
+            </div>
+			<div class="col-md-6 mb-3">
+                <label for="validationDefault05">What is your heighest level of formal qualifications?</label>
+				<div class="fieldWrapper">
+					{{ search_form.formal_qulifications_tags }}
+				</div>
+            </div>
+        </div>   
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label for="validationDefault05">Current Experience</label>
+				<div class="fieldWrapper">
+					{{ search_form.current_experience_tags }}
+				</div>
+            </div>
+			<div class="col-md-6 mb-3">
+                <label for="validationDefault05">Ideal Hours a week</label>
+				<div class="fieldWrapper">
+					{{ search_form.ideal_hours_tags }}
+				</div>
+            </div>
+        </div>  
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label for="validationDefault05">Goals</label>
+				<div class="fieldWrapper">
+					{{ search_form.goals_tags }}
+				</div>
+            </div>
+        </div>  		
+        <a href="{% url 'paths:dashboard' %}" type="button" class="float-right btn btn-primary btn-lg">Find a pathway</a>
+    
 	
-	{{ search_form.as_p }}
+	
+
+	
 	
 	<input type="submit" name="submit" value="Search" />
 	</form>
