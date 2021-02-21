@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from paths.forms import UserForm, UserProfileForm, SearchForm
 from django.contrib.auth.decorators import login_required
 from paths.models import Resource
+from django.contrib import messages
 
 # Create your views here.
 
@@ -78,8 +79,8 @@ def user_login(request):
             else:
                 return HttpResponse("Your account is disabled.")
         else:
-            print(f"Invalid login details: {username}, {password}")
-            return HttpResponse("Invalid login details supplied.")
+            messages.error(request, 'username or password is incorrect.')
+            return redirect('paths:login')
     else:
         return render(request, 'paths/login.html')
         
