@@ -7,9 +7,19 @@ Dashboard
 
 {% block body_block %}
 <div class="container">
+	
+	{% for message in messages %}
+	<div class="alert alert-success">
+		<a class="close" href="#" data-dismiss="alert">×</a>
+
+		{{ message }}
+
+	</div>
+	{% endfor %}
+	
     <h1 class="mt-5">Dashboard</h1>
     {% if user.is_authenticated %}
-    <p class="lead">Hi {{user}}, it’s great to meet you. We hope you find the following advice useful.</p>
+    <p class="lead">Hi {{ user.first_name }} {{ user.last_name }}, it’s great to meet you. We hope you find the following advice useful.</p>
     {% else %}
     <p class="lead">Hi, it’s great to meet you. We hope you find the following advice useful.</p>
     {% endif %}

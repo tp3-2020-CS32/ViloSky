@@ -33,6 +33,12 @@ def search(request):
 
 def dashboard(request):
     try:
+        if request.session['just_registered']:
+            messages.success(request, 'Thanks for registering')
+            request.session['just_registered'] = False
+    except:
+        pass
+    try:
         search_tags = request.session['search_tags']
         print((search_tags))
         resources = Resource.objects.filter(tags__tag_name__in= search_tags).distinct()
@@ -50,11 +56,17 @@ def register(request):
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
             user.set_password(user.password)
-            user.save()
             profile = profile_form.save(commit=False)
+            user.first_name = profile.first_name
+            user.last_name = profile.last_name
+            user.save()
             profile.user = user
             profile.save()
             registered = True
+            request.session['just_registered'] = True
+            new_user = authenticate(username=user.username, password=user.password)
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+            return redirect(reverse('paths:dashboard'))
         else:
             print(user_form.errors, profile_form.errors)
     else:
@@ -75,7 +87,7 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request, user)
-                return redirect(reverse('paths:home'))
+                return redirect(reverse('paths:dashboard'))
             else:
                 return HttpResponse("Your account is disabled.")
         else:
