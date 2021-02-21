@@ -2,33 +2,35 @@
 {% load static %}
 
 {% block title_block %}
-Login
+Login - Vilo Sky
 {% endblock %}
 
 {% block body_block %}
-<div class="container">
-	<h1 class="mt-5">Login to Vilosky Pathways</h1>
-
-	{% for message in messages %}
-	<div class="alert alert-success">
-		<a class="close" href="#" data-dismiss="alert">×</a>
-
-		{{ message }}
-
-	</div>
-	{% endfor %}
-
+<div class="container login-registration">
+	<h1 class="mt-5 text-center">Login to Vilo Sky Paths</h1>
 	<form id="login_form" method="post" action="{% url 'paths:login' %}">
 		{% csrf_token %}
 		<div class="mb-3">
 			<label for="usernameInput" class="form-label">Username</label>
-			<input type="text" name="username" class="form-control" id="usernameInput" aria-describedby="username">
+			<input required="" type="text" name="username" class="form-control" id="usernameInput"
+				aria-describedby="username">
 		</div>
 		<div class="mb-3">
 			<label for="passwordInput" class="form-label">Password</label>
-			<input type="password" name="password" class="form-control" id="passwordInput">
+			<input required="" type="password" name="password" class="form-control" id="passwordInput"
+				aria-describedby="password">
 		</div>
-		<input type="submit" class="btn btn-primary" value="Login">
+		<input type="submit" class="btn btn-login-registration btn-lg" value="Login">
 	</form>
+
+	{% for message in messages %}
+	<div class="alert alert-warning alert-dismissible fade show mt-2" role="alert">
+		{{ message }}
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	{% endfor %}
+
 </div>
 {% endblock %}

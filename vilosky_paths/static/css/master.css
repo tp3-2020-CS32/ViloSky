@@ -50,3 +50,17 @@ a:hover {
 .btn.focus, .btn:focus {
     box-shadow: none;
 }
+
+.login-registration {
+    margin: auto;
+    max-width: 500px;
+}
+
+.btn-login-registration {
+    width: 100%;
+}
+
+.twitter-timeline {
+    border: 1px solid #5c478b !important;
+    border-radius: .3rem;
+}

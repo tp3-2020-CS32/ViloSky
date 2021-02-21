@@ -34,7 +34,7 @@ def search(request):
 def dashboard(request):
     try:
         if request.session['just_registered']:
-            messages.success(request, 'Thanks for registering')
+            messages.success(request, 'Thank you for registering, and welcome to Vilo Sky Paths!')
             request.session['just_registered'] = False
     except:
         pass
@@ -91,7 +91,7 @@ def user_login(request):
             else:
                 return HttpResponse("Your account is disabled.")
         else:
-            messages.error(request, 'username or password is incorrect.')
+            messages.error(request, 'Username or password is incorrect.')
             return redirect('paths:login')
     else:
         return render(request, 'paths/login.html')
