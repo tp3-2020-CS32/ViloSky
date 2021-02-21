@@ -48,6 +48,8 @@ def dashboard(request):
     return render(request, 'paths/dashboard.html', context = {'resources':resources})
 
 def register(request):
+    if request.user.is_authenticated:
+        return redirect(reverse('paths:home'))
     registered = False
     if request.method == 'POST':
         user_form = UserForm(request.POST)
@@ -79,6 +81,8 @@ def register(request):
                                                             
                                                             
 def user_login(request):
+    if request.user.is_authenticated:
+        return redirect(reverse('paths:home'))
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
