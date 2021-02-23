@@ -1,0 +1,29 @@
+body {
+    font-family: 'Montserrat', sans-serif; 
+}
+
+.navbar {
+    border-bottom: 1px solid #cabed8;
+    background-color: #ffffff !important;
+    font-weight: 500;
+}
+
+.logo {
+    max-height: 40px;
+}
+
+.nav-link {
+    font-size: 18px;
+}
+
+.navbar-light .navbar-nav .active > .nav-link {
+    color: #5c478b;
+}
+
+h1, h2, h3 {
+    color: #4f3d76;
+}
+
+figcaption {
+    font: italic smaller sans-serif;
+}
