@@ -3,6 +3,10 @@ from django.contrib.auth.models import User
 from paths.models import UserProfile, Tag
 
 class UserForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['email'].required = True
+
     password = forms.CharField(widget=forms.PasswordInput())
     
     class Meta:
@@ -10,6 +14,11 @@ class UserForm(forms.ModelForm):
         fields = ('username', 'email', 'password',)
         
 class UserProfileForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['first_name'].required = True
+        self.fields['last_name'].required = True
+
     class Meta:
         model = UserProfile
         fields = ('first_name', 'last_name',)

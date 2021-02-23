@@ -2,21 +2,38 @@
 {% load static %}
 
 {% block title_block %}
-Sign Up
+Register - Vilo Sky
 {% endblock %}
 
 {% block body_block %}
-<div class="container">
-	<h1 class="mt-5">Sign Up to Vilosky Pathways</h1>
-	<form id="user_form" method="post" action="{% url 'paths:register' %}" enctype="multipart/form-data">
-
+<div class="container login-registration">
+	<h1 class="mt-5 text-center">Register for Vilo Sky Paths</h1>
+	<form id="register_form" method="post" action="{% url 'paths:register' %}">
 		{% csrf_token %}
-
-		{{ profile_form.as_p }}
-		{{ user_form.as_p }}
-
-		<input type="submit" name="submit" value="Register" />
+		<div class="mb-3">
+			<label for="firstnameInput" class="form-label">First Name</label>
+			<input required="" type="text" name="first_name" class="form-control" id="firstnameInput"
+				aria-describedby="first_name">
+		</div>
+		<div class="mb-3">
+			<label for="lastnameInput" class="form-label">Last Name</label>
+			<input required="" type="text" name="last_name" class="form-control" id="lastnameInput"
+				aria-describedby="last_name">
+		</div>
+		<div class="mb-3">
+			<label for="usernameInput" class="form-label">Username</label>
+			<input required="" type="text" name="username" class="form-control" id="usernameInput"
+				aria-describedby="username">
+		</div>
+		<div class="mb-3">
+			<label for="emailInput" class="form-label">Email address</label>
+			<input required="" type="text" name="email" class="form-control" id="emailInput" aria-describedby="email">
+		</div>
+		<div class="mb-3">
+			<label for="passwordInput" class="form-label">Password</label>
+			<input required="" type="password" name="password" class="form-control" id="passwordInput">
+		</div>
+		<input type="submit" class="btn btn-login-registration btn-lg" value="Register">
 	</form>
 </div>
-
 {% endblock %}
