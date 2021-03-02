@@ -33,8 +33,11 @@ Dashboard - Vilo Sky
                 <div class="row no-gutters">
                     <div class="card-body">
                         <h5 class="card-title">{{resource.name}}</h5>
-                        <p class="card-text">We recommend the following resource:
-                            <br><a href="{{resource.url}}" target="_blank">{{resource.url}}</a>
+                        <p class="card-text">We recommend the following resource{% if resource.url %}s{% endif %}:
+                            <br><a href="/media/{{resource.media}}" target="_blank">{{resource.media}}</a>
+                            {% if resource.url %}
+                                <br><a href="{{resource.url}}" target="_blank">{{resource.url}}</a>
+                            {% endif %}
                         </p>
                     </div>
                 </div>
