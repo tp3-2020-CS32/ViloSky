@@ -43,7 +43,7 @@ class Tag(models.Model):
 class Resource(models.Model):
     name = models.CharField(max_length = 50, unique=True)
     tags = models.ManyToManyField(Tag)
-    media = models.FileField(upload_to='resources/', null=True)
+    media = models.FileField(upload_to='resources/', null=True, blank=True)
     # url for if resource links to external media
     url = models.URLField(blank=True, null=True)
     
