@@ -34,7 +34,7 @@ class Tag(models.Model):
                                 (Ideal_Hours, "Ideal working hours a week"),
                                 (Goals, "Goals"))
     
-    tag_name = models.CharField(max_length = 50, unique=True)    
+    tag_name = models.CharField(max_length = 50, unique=False)    
     tag_categories = models.CharField(max_length = 50, choices=tag_categories_choices,default=Gender)
     
     def __str__(self):
