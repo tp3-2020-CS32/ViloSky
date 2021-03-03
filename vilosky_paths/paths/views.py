@@ -17,10 +17,11 @@ def search(request):
         search_form = SearchForm(request.POST)
         
         if search_form.is_valid():
-            all_tag_details = (search_form.cleaned_data["personal_details_tags"] | search_form.cleaned_data["disability_tags"] | search_form.cleaned_data["current_work_situations"]
-                                | search_form.cleaned_data["work_place_barriers_tags"] | search_form.cleaned_data["last_paid_work_tags"] | search_form.cleaned_data["industry_tags"]
-                                | search_form.cleaned_data["area_of_interest_tags"] | search_form.cleaned_data["formal_qulifications_tags"] | search_form.cleaned_data["current_experience_tags"]
-                                | search_form.cleaned_data["ideal_hours_tags"] | search_form.cleaned_data["goals_tags"] )
+            all_tag_details = (search_form.cleaned_data["gender_tags"] | search_form.cleaned_data["sexual_orientation_tags"] | search_form.cleaned_data["ethnicity_tags"]
+                                | search_form.cleaned_data["disability_tags"] | search_form.cleaned_data["current_work_situation_tags"] | search_form.cleaned_data["work_place_barriers_tags"]
+                                | search_form.cleaned_data["last_paid_work_tags"] | search_form.cleaned_data["industry_tags"] | search_form.cleaned_data["area_of_interest_tags"]
+                                | search_form.cleaned_data["formal_qualifications_tags"] | search_form.cleaned_data["current_experience_tags"] | search_form.cleaned_data["ideal_hours_tags"] 
+                                | search_form.cleaned_data["goals_tags"] )
             print(all_tag_details)
             search_tags_list = []
             for tag in list(all_tag_details.values("tag_name")):
