@@ -35,7 +35,7 @@ class Tag(models.Model):
                                 (Goals, "Goals"))
     
     tag_name = models.CharField(max_length = 50, unique=True)    
-    tag_categories = models.CharField(max_length = 50, choices=tag_categories_choices,default=Personal_Details)
+    tag_categories = models.CharField(max_length = 50, choices=tag_categories_choices,default=Gender)
     
     def __str__(self):
         return self.tag_name
