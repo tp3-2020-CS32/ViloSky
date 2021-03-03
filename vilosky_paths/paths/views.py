@@ -60,6 +60,9 @@ def register(request):
         profile_form = UserProfileForm(request.POST)
         
         if user_form.is_valid() and profile_form.is_valid():
+            user = user_form.save(commit=False)
+            if('@' in user.username):
+                print("fuckery")
             user = user_form.save()
             user.set_password(user.password)
             profile = profile_form.save(commit=False)
@@ -74,6 +77,10 @@ def register(request):
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect(reverse('paths:dashboard'))
         else:
+            for error in user_form.errors:
+                messages.error(request, str(user_form.errors[error]))
+            for error in profile_form.errors:
+                messages.error(request, str(profile_form.errors[error]))
             print(user_form.errors, profile_form.errors)
     else:
         user_form = UserForm()
