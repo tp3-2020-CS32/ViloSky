@@ -58,7 +58,6 @@ def register(request):
     if request.method == 'POST':
         user_form = UserForm(request.POST)
         profile_form = UserProfileForm(request.POST)
-        
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
             user.set_password(user.password)
@@ -74,7 +73,10 @@ def register(request):
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect(reverse('paths:dashboard'))
         else:
-            print(user_form.errors, profile_form.errors)
+            for error in user_form.errors:
+                messages.error(request, str(user_form.errors[error]))
+            for error in profile_form.errors:
+                messages.error(request, str(profile_form.errors[error]))
     else:
         user_form = UserForm()
         profile_form = UserProfileForm()
