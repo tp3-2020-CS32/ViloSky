@@ -64,3 +64,7 @@ a:hover {
     border: 1px solid #5c478b !important;
     border-radius: .3rem;
 }
+
+.form-check {
+    min-width: 200px;
+}

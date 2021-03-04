@@ -5,32 +5,37 @@ from django.contrib.auth.models import User
 class Tag(models.Model):
     
     #Below is all Categories of tags that get added to choices field
-    Personal_Details = "Personal Details"
-    Disability = "Mental or Physical Disability"
-    Current_Work_Situation = "Current Work Situation"
-    Work_Place_Barriers = "Work Place Barriers"
+    Gender = "Gender"
+    Sexual_Orientation = "Sexual orientation"
+    Ethnicity = "Ethnicity"
+    Disability = "Physical or mental disability"
+    Current_Work_Situation = "Current work situation"
+    Work_Place_Barriers = "Current workplace barriers"
     Last_Paid_Work = "Time since last paid work"
-    Industry = "Industry"
-    Area_Of_Interest = "Area of Interest"
-    Formal_Qualifications = "Formal Qualifications"
-    Current_Experience = "Current Experience"
-    Ideal_Hours = "Ideal Working Hours a Week"
+    Industry = "Industries interested in"
+    Area_Of_Interest = "Area of interest"
+    Formal_Qualifications = "Formal qualifications"
+    Current_Experience = "Current experience"
+    Ideal_Hours = "Ideal working hours a week"
     Goals = "Goals"
     
-    tag_categories_choices = ( (Personal_Details, "Personal Details"),
-                                (Disability, "Mental or Physical Disability"),
-                                (Current_Work_Situation, "Current Work Situation"),
-                                (Work_Place_Barriers, "Work Place Barriers"),
+    
+    tag_categories_choices = ( (Gender, "Gender"),
+                                (Sexual_Orientation, "Sexual orientation"),
+                                (Ethnicity, "Ethnicity"),
+                                (Disability, "Physical or mental disability"),
+                                (Current_Work_Situation, "Current work situation"),
+                                (Work_Place_Barriers, "Current workplace barriers"),
                                 (Last_Paid_Work, "Time since last paid work"),
-                                (Industry, "Industry"),
-                                (Area_Of_Interest, "Area of Interest"),
-                                (Formal_Qualifications, "Formal Qualifications"),
+                                (Industry, "Industries interested in"),
+                                (Area_Of_Interest, "Area of interest"),
+                                (Formal_Qualifications, "Formal qualifications"),
                                 (Current_Experience, "Current Experience"),
-                                (Ideal_Hours, "Ideal Working Hours a Week"),
+                                (Ideal_Hours, "Ideal working hours a week"),
                                 (Goals, "Goals"))
     
-    tag_name = models.CharField(max_length = 50, unique=True)    
-    tag_categories = models.CharField(max_length = 50, choices=tag_categories_choices,default=Personal_Details)
+    tag_name = models.CharField(max_length = 50, unique=False)    
+    tag_categories = models.CharField(max_length = 50, choices=tag_categories_choices,default=Gender)
     
     def __str__(self):
         return self.tag_name
