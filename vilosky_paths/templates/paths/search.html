@@ -2,13 +2,15 @@
 {% load static %}
 
 {% block title_block %}
-Paths - Vilo Sky
+Find Paths - Vilo Sky
 {% endblock %}
 
 {% block body_block %}
 <div class="container">
-    <h1 class="mt-5">Find Your Path</h1>
-    <p class="lead">Welcome to </p>
+    <h1 class="mt-5">Find Paths</h1>
+    <p class="lead">Here you can conduct a search to build your very own, personalised Action
+        Plan to help assist in your career progression and growth. All of these questions are optional, but the more you
+        answer, the more tailored we can make your Action Plan.</p>
 
     <form id="search_form" method="post" action="{% url 'paths:search' %}" enctype="multipart/form-data">
         <h2>Personal Questions</h2>
@@ -90,7 +92,7 @@ Paths - Vilo Sky
             <div class="col-md-6 mb-3">
                 <div class="form-group">
                     <label for="formal_qualifications_tags">Do you have relevant qualifications for your area of
-                            interest?</label>
+                        interest?</label>
                     <select id="formal_qualifications_tags" name="formal_qualifications_tags" class="form-control">
                         {% for tag in search_form.formal_qualifications_tags %}
                         {{ tag }}
@@ -102,7 +104,7 @@ Paths - Vilo Sky
             <div class="col-md-6 mb-3">
                 <div class="form-group">
                     <label for="current_experience_tags">How much experience do you have in your area of
-                            interest?</label>
+                        interest?</label>
                     <select id="current_experience_tags" name="current_experience_tags" class="form-control">
                         {% for tag in search_form.current_experience_tags %}
                         {{ tag }}
@@ -129,34 +131,22 @@ Paths - Vilo Sky
             <div class="col-md-6 mb-3">
                 <div class="form-group">
                     <label>What are your current workplace barriers?</label> <br>
-                    <div class="form-row">
-                        {% for tag in search_form.work_place_barriers_tags %}
-                        <div class="form-check form-check-inline">
-                            {{ tag }}
-                        </div>
-                        {% if forloop.counter|divisibleby:2 %}
+                    {% for tag in search_form.work_place_barriers_tags %}
+                    <div class="form-check form-check-inline">
+                        {{ tag }}
                     </div>
-                    <div class="form-row">
-                        {% endif %}
-                        {% endfor %}
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
 
             <div class="col-md-6 mb-3">
                 <div class="form-group">
                     <label>What industries are you interested in?</label> <br>
-                    <div class="form-row">
-                        {% for tag in search_form.industry_tags %}
-                        <div class="form-check form-check-inline">
-                            {{ tag }}
-                        </div>
-                        {% if forloop.counter|divisibleby:2 %}
+                    {% for tag in search_form.industry_tags %}
+                    <div class="form-check form-check-inline">
+                        {{ tag }}
                     </div>
-                    <div class="form-row">
-                        {% endif %}
-                        {% endfor %}
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -165,38 +155,26 @@ Paths - Vilo Sky
             <div class="col-md-6 mb-3">
                 <div class="form-group">
                     <label>What area are you interested in?</label> <br>
-                    <div class="form-row">
-                        {% for tag in search_form.area_of_interest_tags %}
-                        <div class="form-check form-check-inline">
-                            {{ tag }}
-                        </div>
-                        {% if forloop.counter|divisibleby:2 %}
+                    {% for tag in search_form.area_of_interest_tags %}
+                    <div class="form-check form-check-inline">
+                        {{ tag }}
                     </div>
-                    <div class="form-row">
-                        {% endif %}
-                        {% endfor %}
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
 
             <div class="col-md-6 mb-3">
                 <div class="form-group">
                     <label>What would you like to achieve from your next role?</label> <br>
-                    <div class="form-row">
-                        {% for tag in search_form.goals_tags %}
-                        <div class="form-check form-check-inline">
-                            {{ tag }}
-                        </div>
-                        {% if forloop.counter|divisibleby:2 %}
+                    {% for tag in search_form.goals_tags %}
+                    <div class="form-check form-check-inline">
+                        {{ tag }}
                     </div>
-                    <div class="form-row">
-                        {% endif %}
-                        {% endfor %}
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
-        <input type="submit" name="submit" value="Find a Pathway" class="float-right btn btn-lg" />
+        <input type="submit" name="submit" value="Find Your Path" class="float-right btn btn-lg" />
     </form>
 </div>
 {% endblock %}
