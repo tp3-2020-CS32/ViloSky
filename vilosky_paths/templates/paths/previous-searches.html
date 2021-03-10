@@ -1,0 +1,38 @@
+{% extends 'paths/base.html' %}
+{% load static %}
+
+{% block title_block %}
+Home - Vilo Sky
+{% endblock %}
+
+{% block body_block %}
+<div class="container">
+    <h1 class="mt-5">Previous Searches</h1>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Link to Search</th>
+                <th scope="col">Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td><a href="{% url 'paths:dashboard' %}">Test</a></td>
+                <td>10/03/2021</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td><a href="{% url 'paths:dashboard' %}">Test</a></td>
+                <td>10/03/2021</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td><a href="{% url 'paths:dashboard' %}">Test</a></td>
+                <td>10/03/2021</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}
