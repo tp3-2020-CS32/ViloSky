@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from paths.forms import UserForm, UserProfileForm, SearchForm
 from django.contrib.auth.decorators import login_required
-from paths.models import Resource
+from paths.models import Resource, UserProfile, SearchResults
 from django.contrib import messages
 
 # Create your views here.
@@ -24,6 +24,17 @@ def search(request):
                                 | search_form.cleaned_data["goals_tags"] )
             print(all_tag_details)
             search_tags_list = []
+            
+            # adds search data to profile if logged in
+            if request.user.is_authenticated:
+
+                profile = request.user
+                new = SearchResults(profile=profile)               
+                new.save()
+                
+                for tag in list(all_tag_details.values("id")):
+                    new.tags_searched.add(tag['id'])
+                
             for tag in list(all_tag_details.values("tag_name")):
                 search_tags_list.append(tag["tag_name"])
             request.session['search_tags'] = search_tags_list
