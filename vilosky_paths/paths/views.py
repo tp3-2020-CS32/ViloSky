@@ -2,9 +2,9 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
-from paths.forms import UserForm, UserProfileForm, SearchForm
+from paths.forms import UserForm, UserProfileForm, SearchForm, UploadResourceForm
 from django.contrib.auth.decorators import login_required
-from paths.models import Resource
+from paths.models import Resource, Tag
 from django.contrib import messages
 
 # Create your views here.
@@ -106,8 +106,34 @@ def user_login(request):
             return redirect('paths:login')
     else:
         return render(request, 'paths/login.html')
-        
+
 @login_required
 def user_logout(request):
     logout(request)
     return redirect(reverse('paths:home'))
+
+def upload_resource(request):
+    if request.method == 'POST':
+        upload_form = UploadResourceForm(request.POST, request.FILES)
+
+        if upload_form.is_valid():
+            #name = request.POST.get('name')
+            #tags = request.POST.get('tags')
+            #media = request.FILES.get('media')
+            #url = request.POST.get('url')
+            #instance = Resource.objects.get_or_create(name="uploadtest",tags=Tag.objects.filter(tag_name='Female'),url="www.youtube.com")[0]
+            #instance = Tag(tag_name="Male", tag_categories="Gender")
+            #print(request.POST.keys())
+            instance = Resource(media=request.FILES['media'])
+            instance.save()
+            messages.success(request, 'Resource was successfully uploaded!')
+            return redirect('paths:upload-resource')
+        else:
+            for error in upload_form.errors:
+                messages.error(request, str(upload_form.errors[error]))
+    else:
+        upload_form = UploadResourceForm()
+
+    tags = Tag.objects.all()
+    return render(request, 'paths/upload-resource.html', context = {'upload_form':upload_form,
+                                                                    'tags':tags})
