@@ -125,5 +125,9 @@ def user_logout(request):
 
 @login_required
 def previous_searches(request):
-    prev_searches = SearchResults.objects.filter()
-	return render(request, 'paths/previous-searches.html')
+    
+    prev_searches = SearchResults.objects.none()
+    if request.user.is_authenticated:
+        prev_searches  = SearchResults.objects.filter(profile=request.user)
+    
+    return render(request, 'paths/previous-searches.html', context = {'prev_searches ':prev_searches })
