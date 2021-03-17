@@ -125,4 +125,5 @@ def user_logout(request):
 
 @login_required
 def previous_searches(request):
+    prev_searches = SearchResults.objects.filter()
 	return render(request, 'paths/previous-searches.html')
