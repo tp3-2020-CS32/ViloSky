@@ -42,3 +42,4 @@ class UploadResourceForm(forms.ModelForm):
     class Meta:
         model = Resource
         fields = ('name', 'tags', 'media', 'url')
+        widgets = {'media': forms.FileInput(), }

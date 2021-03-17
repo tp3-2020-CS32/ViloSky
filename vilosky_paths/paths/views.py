@@ -6,6 +6,7 @@ from paths.forms import UserForm, UserProfileForm, SearchForm, UploadResourceFor
 from django.contrib.auth.decorators import login_required
 from paths.models import Resource, Tag
 from django.contrib import messages
+from django.contrib.admin.views.decorators import staff_member_required
 
 # Create your views here.
 
@@ -112,20 +113,13 @@ def user_logout(request):
     logout(request)
     return redirect(reverse('paths:home'))
 
+@staff_member_required(login_url='paths:login')
 def upload_resource(request):
     if request.method == 'POST':
         upload_form = UploadResourceForm(request.POST, request.FILES)
 
         if upload_form.is_valid():
-            #name = request.POST.get('name')
-            #tags = request.POST.get('tags')
-            #media = request.FILES.get('media')
-            #url = request.POST.get('url')
-            #instance = Resource.objects.get_or_create(name="uploadtest",tags=Tag.objects.filter(tag_name='Female'),url="www.youtube.com")[0]
-            #instance = Tag(tag_name="Male", tag_categories="Gender")
-            #print(request.POST.keys())
-            instance = Resource(media=request.FILES['media'])
-            instance.save()
+            upload_form.save()
             messages.success(request, 'Resource was successfully uploaded!')
             return redirect('paths:upload-resource')
         else:
