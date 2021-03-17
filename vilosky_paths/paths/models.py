@@ -54,16 +54,14 @@ class Resource(models.Model):
 # hold the search inputs for users' future reference
 class SearchResults(models.Model):
 	time = models.DateTimeField(auto_now_add=True)  # should add the time a search was made automatically
-	username = models.ForeignKey(User, on_delete=models.CASCADE)
-	resources = models.ManyToManyField(Resource)
-	
-	# unsure whether this will read well
+	tags_searched = models.ManyToManyField(Tag, blank=True)
+	profile = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+	# Displays the profile name and time of the search
 	def __str__(self):
-		return self.username + "'s search on " + self.time
+		return  str(self.profile) + "  " + str(self.time)
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    
     first_name = models.CharField(max_length=50,blank=True)
     last_name = models.CharField(max_length=50, blank=True)
     
