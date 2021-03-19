@@ -2,12 +2,17 @@
 {% load static %}
 
 {% block title_block %}
-Home - Vilo Sky
+Previous Searches - Vilo Sky
 {% endblock %}
 
 {% block body_block %}
 <div class="container">
     <h1 class="mt-5">Previous Searches</h1>
+    {% for search in prev_searches %}
+        {{ search.profile }} <br>
+        {{ search.time }} <br>
+        {{ search.tags_searched.values }} <br>
+    {% endfor %}
     <table class="table table-hover">
         <thead>
             <tr>

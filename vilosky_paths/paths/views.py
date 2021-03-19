@@ -130,4 +130,5 @@ def previous_searches(request):
     if request.user.is_authenticated:
         prev_searches  = SearchResults.objects.filter(profile=request.user)
     
-    return render(request, 'paths/previous-searches.html', context = {'prev_searches ':prev_searches })
+    print(prev_searches)
+    return render(request, 'paths/previous-searches.html', context = {'prev_searches':prev_searches })
