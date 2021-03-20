@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
-from paths.forms import UserForm, UserProfileForm, SearchForm
+from paths.forms import UserForm, UserProfileForm, SearchForm, PrevSearches
 from django.contrib.auth.decorators import login_required
 from paths.models import Resource, UserProfile, SearchResults
 from django.contrib import messages
@@ -126,9 +126,27 @@ def user_logout(request):
 @login_required
 def previous_searches(request):
     
-    prev_searches = SearchResults.objects.none()
-    if request.user.is_authenticated:
-        prev_searches  = SearchResults.objects.filter(profile=request.user)
-    
-    print(prev_searches)
-    return render(request, 'paths/previous-searches.html', context = {'prev_searches':prev_searches })
+    if !request.user.is_authenticated:
+        return redirect(reverse('paths:home'))
+    if request.method == 'POST':
+        prev_search_form = PrevSearches(request.POST)
+        
+        if prev_search_form.is_valid():
+            prev_search_details = (prev_search_form.cleaned_data["prev_searches"] )
+            print(all_tag_details)
+            prev_search_tags_list = []
+            
+            prev_searches_tags = prev_search_details.tags_searched.values("tag_name")
+            for tag in list(prev_searches_tags):
+                prev_search_tags_list.append(tag["tag_name"])
+
+            request.session['search_tags'] = prev_search_tags_list
+
+            return redirect('/paths/dashboard')
+        else:
+            print(prev_search_form.errors)
+    else:
+        prev_search_form = PrevSearches(request.user)
+
+
+    return render(request, 'paths/previous-searches.html', context = {'prev_search_form':prev_search_form })
