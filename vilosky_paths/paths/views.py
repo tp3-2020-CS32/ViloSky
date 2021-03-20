@@ -125,28 +125,28 @@ def user_logout(request):
 
 @login_required
 def previous_searches(request):
-    
-    if !request.user.is_authenticated:
+
+    if not (request.user.is_authenticated):
         return redirect(reverse('paths:home'))
     if request.method == 'POST':
-        prev_search_form = PrevSearches(request.POST)
-        
+        prev_search_form = PrevSearches(user=request.user, data=request.POST)
+
         if prev_search_form.is_valid():
             prev_search_details = (prev_search_form.cleaned_data["prev_searches"] )
-            print(all_tag_details)
+
             prev_search_tags_list = []
             
             prev_searches_tags = prev_search_details.tags_searched.values("tag_name")
             for tag in list(prev_searches_tags):
                 prev_search_tags_list.append(tag["tag_name"])
-
+            print(prev_search_tags_list)
             request.session['search_tags'] = prev_search_tags_list
 
             return redirect('/paths/dashboard')
         else:
             print(prev_search_form.errors)
     else:
-        prev_search_form = PrevSearches(request.user)
+        prev_search_form = PrevSearches(user=request.user)
 
-
+    
     return render(request, 'paths/previous-searches.html', context = {'prev_search_form':prev_search_form })

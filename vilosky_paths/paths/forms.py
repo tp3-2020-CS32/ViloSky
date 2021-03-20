@@ -39,9 +39,12 @@ class SearchForm(forms.Form):
     goals_tags = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, queryset=Tag.objects.filter(tag_categories="Goals"), to_field_name="tag_name", required=False)
     
 class PrevSearches(forms.Form):
-   prev_searches = forms.ModelChoiceField(queryset=PrevSearches.objects.filter(profile=user))
+
+   prev_searches = forms.ModelChoiceField(queryset = None)
+   
+   def __init__(self,user=None,*args, **kwargs):
+        super(PrevSearches,self).__init__(**kwargs)
+        if user:
+            self.fields['prev_searches'].queryset = SearchResults.objects.filter(profile=user)
+        
     
-    
-    def __init__(self, *args, **kwargs):
-        self.user = **kwargs.pop('user',None)
-        super(PrevSearches,self).__init__(*args, **kwargs)

@@ -39,5 +39,10 @@ Previous Searches - Vilo Sky
             </tr>
         </tbody>
     </table>
+	<form id="prev_search_form" method="post" action="{% url 'paths:previous-searches' %}" enctype="multipart/form-data">
+		{% csrf_token %}
+		{{ prev_search_form.as_p }}
+		<input type="submit" name="submit" value="Select search" class="float-right btn btn-lg" />
+	</form>
 </div>
 {% endblock %}
