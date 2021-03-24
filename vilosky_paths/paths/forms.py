@@ -40,7 +40,7 @@ class SearchForm(forms.Form):
     
 class PrevSearches(forms.Form):
 
-   prev_searches = forms.ModelChoiceField(queryset = None)
+   prev_searches = forms.ModelChoiceField(queryset = None, widget=forms.Select(attrs={'size':'10','class':'form-control prev-searches'}), label="", empty_label=None)
    
    def __init__(self,user=None,*args, **kwargs):
         super(PrevSearches,self).__init__(**kwargs)
