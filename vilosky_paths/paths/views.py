@@ -118,11 +118,11 @@ def user_login(request):
     else:
         return render(request, 'paths/login.html')
         
-@login_required
+@login_required(login_url='/paths/login/')
 def user_logout(request):
     logout(request)
     return redirect(reverse('paths:home'))
 
-@login_required
+@login_required(login_url='/paths/login/')
 def previous_searches(request):
 	return render(request, 'paths/previous-searches.html')
