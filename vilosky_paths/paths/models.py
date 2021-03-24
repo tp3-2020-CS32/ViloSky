@@ -58,7 +58,7 @@ class SearchResults(models.Model):
 	profile = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
 	# Displays the profile name and time of the search
 	def __str__(self):
-		return  str(self.profile) + "  " + str(self.time)
+		return  str(self.profile) + "  " + str(self.time.strftime("%d/%m/%Y %I:%M %p"))
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
