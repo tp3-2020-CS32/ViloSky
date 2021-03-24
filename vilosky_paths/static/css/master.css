@@ -1,11 +1,12 @@
 body {
-    font-family: 'Montserrat', sans-serif; 
+    font-family: 'Montserrat', sans-serif;
+    padding-top: 67px;
 }
 
 .navbar {
-    border-bottom: 1px solid #cabed8;
     background-color: #ffffff !important;
     font-weight: 500;
+    transition: top 0.2s ease-in-out;
 }
 
 .logo {
@@ -16,7 +17,7 @@ body {
     font-size: 18px;
 }
 
-.navbar-light .navbar-nav .active > .nav-link {
+.navbar-light .navbar-nav .active>.nav-link {
     color: #5c478b;
 }
 
@@ -61,7 +62,7 @@ a:hover {
 }
 
 .twitter-timeline {
-    border: 1px solid #5c478b !important;
+    border: 2px solid #5c478b !important;
     border-radius: .3rem;
 }
 
@@ -71,4 +72,8 @@ a:hover {
 
 #id_prev_searches {
     font-size: 1.5rem;
+}
+
+.navbar.hidden {
+    top: -67px;
 }
