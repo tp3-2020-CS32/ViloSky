@@ -16,17 +16,19 @@ function activeNavItem() {
  * Adds/removes 'hidden' class from navbar when scrolling
  */
 function stickyNavbar() {
-    var banner_height = $(".navbar").height();
+    var navbarHeight = $(".navbar").height();
     var lastScrollTop = 0;
     $(window).scroll(function () {
         var scroll = $(window).scrollTop();
-        var currScrollTop = $(this).scrollTop();
-        if (scroll >= banner_height && currScrollTop > lastScrollTop) {
+        var currentScrollTop = $(this).scrollTop();
+        if (scroll >= navbarHeight && currentScrollTop > lastScrollTop) {
             $("nav").addClass('hidden');
+            $("nav").removeClass('shadow-sm');
         } else {
             $("nav").removeClass('hidden');
+            $("nav").addClass('shadow-sm');
         }
-        lastScrollTop = currScrollTop;
+        lastScrollTop = currentScrollTop;
 
     });
 }
@@ -37,9 +39,9 @@ function stickyNavbar() {
 function autoCloseNavbar() {
     $(document).scroll(function (event) {
         var clickover = $(event.target);
-        var _opened = $(".navbar-collapse").hasClass("collapse show");
+        var navbarOpen = $(".navbar-collapse").hasClass("collapse show");
 
-        if (_opened == true && !clickover.hasClass("navbar-toggler")) {
+        if (navbarOpen == true && !clickover.hasClass("navbar-toggler")) {
             $("button.navbar-toggler").click();
         }
     });

@@ -17,7 +17,7 @@ body {
     font-size: 18px;
 }
 
-.navbar-light .navbar-nav .active > .nav-link {
+.navbar-light .navbar-nav .active>.nav-link {
     color: #5c478b;
 }
 
@@ -75,5 +75,5 @@ a:hover {
 }
 
 .navbar.hidden {
-	top:-67px;
+    top: -67px;
 }
