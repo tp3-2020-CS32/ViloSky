@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from paths.models import UserProfile, Tag, Resource
+from paths.models import UserProfile, Tag, SearchResults
 
 class UserForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -43,3 +44,14 @@ class UploadResourceForm(forms.ModelForm):
         model = Resource
         fields = ('name', 'tags', 'media', 'url')
         widgets = {'media': forms.FileInput(), }
+    
+class PrevSearches(forms.Form):
+
+   prev_searches = forms.ModelChoiceField(queryset = None, widget=forms.Select(attrs={'size':'10','class':'form-control prev-searches'}), label="", empty_label=None)
+   
+   def __init__(self,user=None,*args, **kwargs):
+        super(PrevSearches,self).__init__(**kwargs)
+        if user:
+            self.fields['prev_searches'].queryset = SearchResults.objects.filter(profile=user)
+        
+    

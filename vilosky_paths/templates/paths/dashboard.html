@@ -58,7 +58,7 @@ Dashboard - Vilo Sky
         </div>
         <div class="col-sm-3 text-center">
             {% if user.is_authenticated %}
-            <button type="button" class="btn btn-lg btn-block">View previous searches</button>
+            <a href="{% url 'paths:previous-searches' %}" role="button" class="btn btn-lg btn-block">View previous searches</a>
             {% endif %}
             <button type="button" class="btn btn-lg btn-block">View a list of resources</button>
             <button type="button" class="btn btn-lg btn-block">Download advice PDF</button>
