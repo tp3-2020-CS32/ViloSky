@@ -123,9 +123,15 @@ def user_logout(request):
     logout(request)
     return redirect(reverse('paths:home'))
 
-@login_required
+@login_required(login_url='/paths/login/')
 def previous_searches(request):
-
+    
+    prev_search_not_empty = True
+    if(SearchResults.objects.filter(profile=request.user)):
+        prev_search_not_empty = True
+    else:
+        prev_search_not_empty = False
+        
     if not (request.user.is_authenticated):
         return redirect(reverse('paths:home'))
     if request.method == 'POST':
@@ -149,4 +155,4 @@ def previous_searches(request):
         prev_search_form = PrevSearches(user=request.user)
 
     
-    return render(request, 'paths/previous-searches.html', context = {'prev_search_form':prev_search_form })
+    return render(request, 'paths/previous-searches.html', context = {'prev_search_form':prev_search_form, 'prev_search_check':prev_search_not_empty })
