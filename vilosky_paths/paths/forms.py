@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from paths.models import UserProfile, Tag
+from paths.models import UserProfile, Tag, SearchResults
 
 class UserForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -37,3 +37,14 @@ class SearchForm(forms.Form):
     current_experience_tags = forms.ModelMultipleChoiceField(queryset=Tag.objects.filter(tag_categories="Current experience"), to_field_name="tag_name", required=False)
     ideal_hours_tags = forms.ModelMultipleChoiceField(queryset=Tag.objects.filter(tag_categories="Ideal working hours a week"), to_field_name="tag_name", required=False)
     goals_tags = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, queryset=Tag.objects.filter(tag_categories="Goals"), to_field_name="tag_name", required=False)
+    
+class PrevSearches(forms.Form):
+
+   prev_searches = forms.ModelChoiceField(queryset = None, widget=forms.Select(attrs={'size':'10','class':'form-control prev-searches'}), label="", empty_label=None)
+   
+   def __init__(self,user=None,*args, **kwargs):
+        super(PrevSearches,self).__init__(**kwargs)
+        if user:
+            self.fields['prev_searches'].queryset = SearchResults.objects.filter(profile=user)
+        
+    

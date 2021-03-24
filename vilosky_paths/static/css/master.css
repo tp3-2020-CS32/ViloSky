@@ -68,3 +68,7 @@ a:hover {
 .form-check {
     min-width: 200px;
 }
+
+#id_prev_searches {
+    font-size: 1.5rem;
+}
