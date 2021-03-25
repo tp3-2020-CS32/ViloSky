@@ -18,51 +18,58 @@ Dashboard - Vilo Sky
     </div>
     {% endfor %}
 
-    {% if user.is_authenticated %}
-    <p class="lead">Hi {{ user.first_name }} {{ user.last_name }}, welcome to your dashboard! From here you can view
-        current and previous searches containing our advice to you.</p>
-    {% else %}
-    <p class="lead">Hi, it’s great to meet you! We hope you find the following advice useful.</p>
-    {% endif %}
-    <h2>Our Advice</h2>
-    <div class="row">
+    <div class="row mb-4">
         <div class="col-sm-9">
-            {% if resources %}
-            {% for resource in resources %}
-            <div class="card mb-3">
-                <div class="row no-gutters">
-                    <div class="card-body">
-                        <h5 class="card-title">{{resource.name}}</h5>
-                        {% if resource.media and resource.url %}
-                            <p class="card-text">We recommend the following resources:
-                                <br><a href="/media/{{resource.media}}" target="_blank">{{resource.name}}</a>
-                                <br><a href="{{resource.url}}" target="_blank">{{resource.url}}</a>
-                            </p>
-                        {% elif resource.media %}
-                            <p class="card-text">We recommend the following resource:
-                                <br><a href="/media/{{resource.media}}" target="_blank">{{resource.name}}</a>
-                            </p>
-                        {% elif resource.url %}
-                            <p class="card-text">We recommend the following website:
-                                <br><a href="{{resource.url}}" target="_blank">{{resource.url}}</a>
-                            </p>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
+            {% if user.is_authenticated %}
+            <p class="lead">Hi {{ user.first_name }} {{ user.last_name }}, welcome to your dashboard! From here you can
+                view
+                current and previous searches containing our advice for you.</p>
             {% else %}
-            <p>You have not run a recent search. You can run one by heading to <a href="{% url 'paths:search' %}">Find
-                    Paths</a>.</p>
+            <p class="lead">Hi, it’s great to meet you! We hope you find the following advice useful. Feel free to
+                create an account to save your search history and receive updates from the Vilo Sky team.</p>
             {% endif %}
         </div>
-        <div class="col-sm-3 text-center">
+        <div class="col-sm-3">
             {% if user.is_authenticated %}
-            <a href="{% url 'paths:previous-searches' %}" role="button" class="btn btn-lg btn-block">View previous searches</a>
+            <a href="{% url 'paths:previous-searches' %}" role="button" class="btn btn-lg btn-block">View previous
+                searches</a>
+            {% else %}
+            <a href="{% url 'paths:register' %}" role="button" class="btn btn-lg btn-block">Create an
+                account</a>
             {% endif %}
-            <button type="button" class="btn btn-lg btn-block">View a list of resources</button>
-            <button type="button" class="btn btn-lg btn-block">Download advice PDF</button>
         </div>
     </div>
+    <h2>Our Advice</h2>
+
+    {% if resources %}
+    <div class="row row-cols-1 row-cols-md-2">
+        {% for resource in resources %}
+        <div class="col mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{resource.name}}</h5>
+                    {% if resource.media and resource.url %}
+                    <p class="card-text">We recommend the following resources:
+                        <br><a href="/media/{{resource.media}}" target="_blank">{{resource.name}}</a>
+                        <br><a href="{{resource.url}}" target="_blank">{{resource.url}}</a>
+                    </p>
+                    {% elif resource.media %}
+                    <p class="card-text">We recommend the following resource:
+                        <br><a href="/media/{{resource.media}}" target="_blank">{{resource.name}}</a>
+                    </p>
+                    {% elif resource.url %}
+                    <p class="card-text">We recommend the following website:
+                        <br><a href="{{resource.url}}" target="_blank">{{resource.url}}</a>
+                    </p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>You have not run a recent search. You can run one by heading to <a href="{% url 'paths:search' %}">Find
+            Paths</a>.</p>
+    {% endif %}
 </div>
 {% endblock %}
