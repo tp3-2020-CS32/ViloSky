@@ -22,6 +22,7 @@ Login - Vilo Sky
 		</div>
 		<input type="submit" class="btn btn-login-registration btn-lg" value="Login">
 	</form>
+	<p>Don't have an account yet? <a href="{% url 'paths:register' %}">Register here.</a></p>
 
 	{% for message in messages %}
 	<div class="alert alert-warning alert-dismissible fade show mt-2" role="alert">

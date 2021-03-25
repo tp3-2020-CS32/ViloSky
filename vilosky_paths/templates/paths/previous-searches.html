@@ -8,6 +8,10 @@ Previous Searches - Vilo Sky
 {% block body_block %}
 <div class="container">
     <h1 class="mt-5">Previous Searches</h1>
+    <p class="lead">Hi {{ user.first_name }} {{ user.last_name }}, welcome to your previous searches! From here you can
+        view all of your previous searches containing our advice for you.</p>
+
+    <h2>Your Searches</h2>
 
     {% if prev_search_check %}
     {% for message in messages %}
@@ -21,12 +25,12 @@ Previous Searches - Vilo Sky
     <form id="prev_search_form" method="post" action="{% url 'paths:previous-searches' %}" enctype="multipart/form-data"
         size="4">
         <div class="row">
-            <div class="col-sm-9">
+            <div class="col-sm-9 mb-3">
                 {% csrf_token %}
                 {{ prev_search_form }}
             </div>
             <div class="col-sm-3 text-center">
-                <input type="submit" name="submit" value="Select search" class="float-right btn btn-lg btn-block" />
+                <input type="submit" name="submit" value="Select Search" class="float-right btn btn-lg btn-block" />
             </div>
         </div>
     </form>

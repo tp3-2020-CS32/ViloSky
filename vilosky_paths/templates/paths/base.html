@@ -28,8 +28,7 @@
 <body class="d-flex flex-column h-100">
     <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light shadow-sm">
         <a class="navbar-brand" href="{% url 'paths:home' %}">
-            <img src="{% static 'images/logo.jpg' %}" class="logo d-inline-block align-top"
-                alt="logo">
+            <img src="{% static 'images/logo.jpg' %}" class="logo d-inline-block align-top" alt="logo">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,9 +42,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'paths:search' %}">Find Paths</a>
                 </li>
-                {% if user.is_staff %}
+                {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'paths:upload-resource' %}">Upload Resources<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{% url 'paths:previous-searches' %}">Previous Searches</a>
                 </li>
                 {% endif %}
             </ul>
