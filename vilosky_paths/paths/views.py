@@ -61,8 +61,13 @@ def dashboard(request):
         resources = Resource.objects.filter(tags__tag_name__in= search_tags).distinct()
     except:
         return render(request, 'paths/dashboard.html', context = None)
-
-    return render(request, 'paths/dashboard.html', context = {'resources':resources})
+    
+    prev_searches_empty = True
+    if(request.user.is_authenticated()):
+       if(SearchResults.objects.filter(profile=request.user)): 
+            prev_searches_empty = False
+           
+    return render(request, 'paths/dashboard.html', context = {'resources':resources, 'prev_searches_empty':prev_searches_empty})
 
 def register(request):
     if request.user.is_authenticated:
