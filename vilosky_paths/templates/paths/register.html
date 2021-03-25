@@ -8,6 +8,16 @@ Register - Vilo Sky
 {% block body_block %}
 <div class="container login-registration">
 	<h1 class="mt-5 text-center">Register for Vilo Sky Paths</h1>
+
+	{% for message in messages %}
+	<div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+		{{ message }}
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	{% endfor %}
+
 	<form id="register_form" method="post" action="{% url 'paths:register' %}">
 		{% csrf_token %}
 		<div class="mb-3">
@@ -36,15 +46,5 @@ Register - Vilo Sky
 		<input type="submit" class="btn btn-login-registration btn-lg" value="Register">
 	</form>
 	<p>Already have an account? <a href="{% url 'paths:login' %}">Login here.</a></p>
-	{% if messages %}
-	{% for message in messages %}
-		<div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
-			{{ message }}
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			</button>
-		</div>
-    {% endfor %}
-{% endif %}
 </div>
 {% endblock %}

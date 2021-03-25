@@ -171,7 +171,7 @@ def previous_searches(request):
 
             return redirect('/paths/dashboard')
         else:
-            messages.error(request, 'You have not selected a recent search.')
+            messages.error(request, 'You have not selected a search.')
             return redirect('paths:previous-searches')
     else:
         prev_search_form = PrevSearches(user=request.user)
