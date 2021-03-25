@@ -134,15 +134,14 @@ def upload_resource(request):
         if upload_form.is_valid():
             upload_form.save()
             messages.success(request, 'Resource was successfully uploaded!')
-            return redirect('paths:upload-resource')
+            return redirect('paths:resource-upload')
         else:
-            for error in upload_form.errors:
-                messages.error(request, str(upload_form.errors[error]))
+            messages.error(request, 'Name and tag(s) are required.')
     else:
         upload_form = UploadResourceForm()
 
     tags = Tag.objects.all()
-    return render(request, 'paths/upload-resource.html', context = {'upload_form':upload_form,
+    return render(request, 'paths/resource-upload.html', context = {'upload_form':upload_form,
                                                                     'tags':tags})
 
 @login_required(login_url='/paths/login/')

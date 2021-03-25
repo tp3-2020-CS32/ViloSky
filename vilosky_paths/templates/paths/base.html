@@ -47,6 +47,10 @@
                     <a class="nav-link" href="{% url 'paths:previous-searches' %}">Previous Searches</a>
                 </li>
                 {% endif %}
+                {% if user.is_staff %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'paths:resource-upload' %}">Resource Upload</a>
+                </li>
+                {% endif %}
             </ul>
             <ul class="navbar-nav justify-content-end">
                 {% if user.is_authenticated %}
