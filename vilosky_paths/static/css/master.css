@@ -77,3 +77,8 @@ a:hover {
 .navbar.hidden {
     top: -67px;
 }
+
+.form-control:focus {
+    border-color: #5c478b;
+    box-shadow: 0 0 0 .2rem rgba(58, 45, 88, 0.295);
+}

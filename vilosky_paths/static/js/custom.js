@@ -23,10 +23,8 @@ function stickyNavbar() {
         var currentScrollTop = $(this).scrollTop();
         if (scroll >= navbarHeight && currentScrollTop > lastScrollTop) {
             $("nav").addClass('hidden');
-            $("nav").removeClass('shadow-sm');
         } else {
             $("nav").removeClass('hidden');
-            $("nav").addClass('shadow-sm');
         }
         lastScrollTop = currentScrollTop;
 
