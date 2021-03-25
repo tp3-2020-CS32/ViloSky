@@ -21,7 +21,7 @@ Previous Searches - Vilo Sky
     <form id="prev_search_form" method="post" action="{% url 'paths:previous-searches' %}" enctype="multipart/form-data"
         size="4">
         <div class="row">
-            <div class="col-sm-9">
+            <div class="col-sm-9 mb-3">
                 {% csrf_token %}
                 {{ prev_search_form }}
             </div>
