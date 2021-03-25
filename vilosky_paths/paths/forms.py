@@ -40,11 +40,11 @@ class SearchForm(forms.Form):
     
 class PrevSearches(forms.Form):
 
-   prev_searches = forms.ModelChoiceField(queryset = None, widget=forms.Select(attrs={'size':'10','class':'form-control prev-searches'}), label="", empty_label=None)
+   prev_searches = forms.ModelChoiceField(queryset = None, widget=forms.Select(attrs={'size':'10','class':'form-control prev-searches','required':''}), label="", empty_label=None)
    
    def __init__(self,user=None,*args, **kwargs):
         super(PrevSearches,self).__init__(**kwargs)
         if user:
-            self.fields['prev_searches'].queryset = SearchResults.objects.filter(profile=user)
+            self.fields['prev_searches'].queryset = (SearchResults.objects.filter(profile=user)).order_by('time').reverse()
         
     
