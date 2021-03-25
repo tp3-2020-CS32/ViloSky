@@ -31,11 +31,11 @@ Dashboard - Vilo Sky
         </div>
         <div class="col-sm-3">
             {% if user.is_authenticated %}
-            <a href="{% url 'paths:previous-searches' %}" role="button" class="btn btn-lg btn-block">View previous
-                searches</a>
+            <a href="{% url 'paths:previous-searches' %}" role="button" class="btn btn-lg btn-block">View Previous
+                Searches</a>
             {% else %}
             <a href="{% url 'paths:register' %}" role="button" class="btn btn-lg btn-block">Create an
-                account</a>
+                Account</a>
             {% endif %}
         </div>
     </div>
