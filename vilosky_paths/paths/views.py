@@ -2,10 +2,11 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
-from paths.forms import UserForm, UserProfileForm, SearchForm, PrevSearches
+from paths.forms import UserForm, UserProfileForm, SearchForm, PrevSearches, UploadResourceForm
 from django.contrib.auth.decorators import login_required
-from paths.models import Resource, UserProfile, SearchResults
+from paths.models import Resource, UserProfile, SearchResults, Tag
 from django.contrib import messages
+from django.contrib.admin.views.decorators import staff_member_required
 
 # Create your views here.
 
@@ -118,10 +119,31 @@ def user_login(request):
     else:
         return render(request, 'paths/login.html')
         
+
 @login_required(login_url='/paths/login/')
 def user_logout(request):
     logout(request)
     return redirect(reverse('paths:home'))
+
+
+@staff_member_required(login_url='paths:login')
+def upload_resource(request):
+    if request.method == 'POST':
+        upload_form = UploadResourceForm(request.POST, request.FILES)
+
+        if upload_form.is_valid():
+            upload_form.save()
+            messages.success(request, 'Resource was successfully uploaded!')
+            return redirect('paths:upload-resource')
+        else:
+            for error in upload_form.errors:
+                messages.error(request, str(upload_form.errors[error]))
+    else:
+        upload_form = UploadResourceForm()
+
+    tags = Tag.objects.all()
+    return render(request, 'paths/upload-resource.html', context = {'upload_form':upload_form,
+                                                                    'tags':tags})
 
 @login_required(login_url='/paths/login/')
 def previous_searches(request):
