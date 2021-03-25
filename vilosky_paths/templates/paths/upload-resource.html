@@ -18,7 +18,7 @@ Upload Resources to the Vilo Sky Database
 
 		<div class="mb-3">
 			<label for="tagsInput" class="form-label">Tag(s)</label>
-			<select name="tags" class="form-control" id="tags" required>
+			<select name="tags" class="form-control" id="tags" required multiple>
                 {% for tag in upload_form.tags %}
                 {{ tag }}
                 {% endfor %}
