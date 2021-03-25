@@ -68,8 +68,25 @@ Dashboard - Vilo Sky
         {% endfor %}
     </div>
     {% else %}
-    <p>You have not run a recent search. You can run one by heading to <a href="{% url 'paths:search' %}">Find
-            Paths</a>.</p>
+		{% if search_selected %}
+			{% if user.is_authenticated %}
+			<p>Your search returned no results, you can complete a new search by heading to <a href="{% url 'paths:search' %}">Find
+				Paths</a> or you can view another previous search by heaing to <a href="{% url 'paths:previous-searches' %}">Previous Searches
+				</a>.</p>
+			{% else %}
+			<p>Your search returned no results, you can complete a new search by heading to <a href="{% url 'paths:search' %}">Find
+				Paths</a>.</p>
+			{% endif %}
+		{% else %}
+			{% if user.is_authenticated %}
+			<p>You have not selected a search, you can complete a new search by heading to <a href="{% url 'paths:search' %}">Find
+				Paths</a>.or you can view another previous search by heaing to <a href="{% url 'paths:previous-searches' %}">Previous Searches
+				</a>.</p>
+			{% else %}
+			<p>You have not completed a search yet, you can complete a new search by heading to <a href="{% url 'paths:search' %}">Find
+				Paths</a> 
+			{% endif %}
+		{% endif %}
     {% endif %}
 </div>
 {% endblock %}

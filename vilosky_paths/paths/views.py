@@ -49,6 +49,7 @@ def search(request):
     return render(request, 'paths/search.html', context = {'search_form':search_form})
 
 def dashboard(request):
+    
     try:
         if request.session['just_registered']:
             messages.success(request, 'Thank you for registering, and welcome to Vilo Sky Paths!')
@@ -60,14 +61,12 @@ def dashboard(request):
         print((search_tags))
         resources = Resource.objects.filter(tags__tag_name__in= search_tags).distinct()
     except:
-        return render(request, 'paths/dashboard.html', context = None)
+        search_selected = False
+        return render(request, 'paths/dashboard.html', context = {'search_selected':search_selected})
     
-    prev_searches_empty = True
-    if(request.user.is_authenticated()):
-       if(SearchResults.objects.filter(profile=request.user)): 
-            prev_searches_empty = False
+    search_selected = True
            
-    return render(request, 'paths/dashboard.html', context = {'resources':resources, 'prev_searches_empty':prev_searches_empty})
+    return render(request, 'paths/dashboard.html', context = {'resources':resources, 'search_selected':search_selected})
 
 def register(request):
     if request.user.is_authenticated:
