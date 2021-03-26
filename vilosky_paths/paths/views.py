@@ -182,3 +182,6 @@ def previous_searches(request):
 
     
     return render(request, 'paths/previous-searches.html', context = {'prev_search_form':prev_search_form, 'prev_search_check':prev_search_not_empty })
+
+def privacy_policy(request):
+	return render(request, 'paths/privacy-policy.html')
