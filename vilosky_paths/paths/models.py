@@ -2,10 +2,10 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 
-
+"""
+All the categories of tags used to label resources.
+"""
 class Tag(models.Model):
-
-    # Below is all Categories of tags that get added to choices field
     Gender = "Gender"
     Sexual_Orientation = "Sexual orientation"
     Ethnicity = "Ethnicity"
@@ -41,28 +41,27 @@ class Tag(models.Model):
     def __str__(self):
         return self.tag_name
 
-
+"""
+Creates an instance of a resource with a given name, media, url with relevant 
+tags assigned to it. Can hold a file and/or a url for an external site.
+"""
 class Resource(models.Model):
     name = models.CharField(max_length=50, unique=True)
     tags = models.ManyToManyField(Tag)
     media = models.FileField(upload_to='resources/', null=True, blank=True)
-    # url for if resource links to external media
     url = models.URLField(blank=True, null=True)
 
     def __str__(self):
         return self.name
 
-# currently only holds data on the search results, but could theoretically also
-# hold the search inputs for users' future reference
-
-
+"""
+Stores the tags, time and current user in order to recreate previous searches.
+"""
 class SearchResults(models.Model):
-    # should add the time a search was made automatically
     time = models.DateTimeField(auto_now_add=True)
     tags_searched = models.ManyToManyField(Tag, blank=True)
     profile = models.ForeignKey(
         User, null=True, blank=True, on_delete=models.CASCADE)
-    # Displays the profile name and time of the search
 
     def __str__(self):
         return str(self.time.strftime("%d/%m/%Y %I:%M %p"))

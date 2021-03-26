@@ -15,6 +15,11 @@ def home(request):
     return render(request, 'paths/home.html')
 
 
+"""
+Gets the details from the search form and compiles all the QuerySets together. 
+If the user is logged in it creates a new SearchResults instance for the user with all the tags they selected. 
+It then adds all these tags to the session variable and redirects to dashboard
+"""
 def search(request):
     if request.method == 'POST':
         search_form = SearchForm(request.POST)
@@ -25,12 +30,9 @@ def search(request):
                                | search_form.cleaned_data["last_paid_work_tags"] | search_form.cleaned_data["industry_tags"] | search_form.cleaned_data["area_of_interest_tags"]
                                | search_form.cleaned_data["formal_qualifications_tags"] | search_form.cleaned_data["current_experience_tags"] | search_form.cleaned_data["ideal_hours_tags"]
                                | search_form.cleaned_data["goals_tags"])
-            print(all_tag_details)
             search_tags_list = []
 
-            # adds search data to profile if logged in
             if request.user.is_authenticated:
-
                 profile = request.user
                 new = SearchResults(profile=profile)
                 new.save()
@@ -50,9 +52,11 @@ def search(request):
 
     return render(request, 'paths/search.html', context={'search_form': search_form})
 
-
+"""
+Displays a welcome message on the dashboard if a user has just registered. Displays a filtered list of resources if tags 
+were selected during a search, otherwise displays nothing.
+"""
 def dashboard(request):
-
     try:
         if request.session['just_registered']:
             messages.success(
@@ -62,7 +66,6 @@ def dashboard(request):
         pass
     try:
         search_tags = request.session['search_tags']
-        print((search_tags))
         resources = Resource.objects.filter(
             tags__tag_name__in=search_tags).distinct()
     except:
@@ -137,6 +140,9 @@ def user_logout(request):
     return redirect(reverse('paths:home'))
 
 
+"""
+Allows staff members to upload resources without using the admin interface.
+"""
 @staff_member_required(login_url='paths:login')
 def upload_resource(request):
     if request.method == 'POST':
@@ -155,10 +161,14 @@ def upload_resource(request):
     return render(request, 'paths/resource-upload.html', context={'upload_form': upload_form,
                                                                   'tags': tags})
 
-
+"""
+Passes the current user to the PreviousSearches form to populate the form with the past searches. 
+Once valid the view gets the selected Prev Search and adds the tags from it to session variables 
+and redirects to Dashboard. The view also sends a context variable to the template that checks if 
+the user has no previous searches.
+"""
 @login_required(login_url='/paths/login/')
 def previous_searches(request):
-
     prev_search_not_empty = True
     if(SearchResults.objects.filter(profile=request.user)):
         prev_search_not_empty = True

@@ -64,7 +64,6 @@ class UploadResourceForm(forms.ModelForm):
 
 
 class PrevSearches(forms.Form):
-
     prev_searches = forms.ModelChoiceField(queryset=None, widget=forms.Select(
         attrs={'size': '10', 'class': 'form-control prev-searches', 'required': ''}), label="", empty_label=None)
 
