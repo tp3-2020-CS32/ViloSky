@@ -22,8 +22,8 @@ from django.conf.urls.static import static
 from paths import views
 
 urlpatterns = [
-	path('', views.home, name='home'),
-	path('paths/', include('paths.urls')),
-	#the above maps any URLs starting with paths/ to be handled by the paths app
-	path('admin/', admin.site.urls),
+    path('', views.home, name='home'),
+    path('paths/', include('paths.urls')),
+    # the above maps any URLs starting with paths/ to be handled by the paths app
+    path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
