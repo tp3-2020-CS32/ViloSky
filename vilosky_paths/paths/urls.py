@@ -11,5 +11,6 @@ urlpatterns = [
     path('login/', views.user_login, name='login'),
     path('logout/', views.user_logout, name='logout'),
     path('resource-upload/', views.upload_resource, name='resource-upload'),
-    path('previous-searches/', views.previous_searches, name='previous-searches')
+    path('previous-searches/', views.previous_searches, name='previous-searches'),
+    path('privacy-policy/', views.privacy_policy, name='privacy-policy'),
 ]

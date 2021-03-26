@@ -33,5 +33,7 @@ Login - Vilo Sky
 		<input type="submit" class="btn btn-login-registration btn-lg" value="Login">
 	</form>
 	<p>Don't have an account yet? <a href="{% url 'paths:register' %}">Register here.</a></p>
+	<div class="dropdown-divider"></div>
+	<p>By logging in you agree to our <a href="{% url 'paths:privacy-policy' %}">Privacy Policy.</a></p>
 </div>
 {% endblock %}
